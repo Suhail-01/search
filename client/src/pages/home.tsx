@@ -1,8 +1,7 @@
 import React from "react";
-import { Search, ArrowRight, ExternalLink } from "lucide-react";
+import { Search } from "lucide-react";
 import Header from "@/components/layout/Header";
 import SearchBar from "@/components/search/SearchBar";
-import { Button } from "@/components/ui/button";
 import { Card, CardContent } from "@/components/ui/card";
 
 export default function Home() {
@@ -123,43 +122,7 @@ export default function Home() {
           </div>
         </section>
         
-        {/* API Section */}
-        <section className="w-full py-12 md:py-24 lg:py-32">
-          <div className="container px-4 md:px-6">
-            <div className="grid gap-6 lg:grid-cols-2 lg:gap-12">
-              <div className="flex flex-col justify-center space-y-4">
-                <div className="space-y-2">
-                  <h2 className="text-3xl font-bold tracking-tighter sm:text-4xl">
-                    Powered by Datamuse API
-                  </h2>
-                  <p className="max-w-[600px] text-muted-foreground md:text-xl">
-                    This application leverages the free Datamuse API for word suggestions, helping you find the words you're looking for faster.
-                  </p>
-                </div>
-                <div>
-                  <a 
-                    href="https://api.datamuse.com" 
-                    target="_blank" 
-                    rel="noopener noreferrer"
-                  >
-                    <Button variant="outline" className="mt-4">
-                      Learn More About Datamuse API
-                      <ExternalLink className="ml-2 h-4 w-4" />
-                    </Button>
-                  </a>
-                </div>
-              </div>
-              <div className="flex items-center justify-center">
-                <div className="rounded-xl overflow-hidden bg-muted p-2 w-full max-w-md">
-                  <div className="bg-background p-4 rounded-lg">
-                    <code className="text-sm font-mono text-muted-foreground">https://api.datamuse.com/sug?s=</code>
-                    <code className="text-sm font-mono text-primary">your_query</code>
-                  </div>
-                </div>
-              </div>
-            </div>
-          </div>
-        </section>
+
       </main>
       
       <footer className="w-full py-6 bg-background border-t">

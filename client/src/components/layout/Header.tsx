@@ -20,19 +20,6 @@ export default function Header() {
         
         <div className="flex items-center justify-end space-x-4">
           <nav className="flex items-center space-x-4">
-            <Link href="https://api.datamuse.com" target="_blank">
-              <span className="text-sm font-medium transition-colors hover:text-primary cursor-pointer">
-                API Docs
-              </span>
-            </Link>
-            <a 
-              href="https://github.com" 
-              target="_blank" 
-              rel="noopener noreferrer"
-              className="text-sm font-medium transition-colors hover:text-primary"
-            >
-              GitHub
-            </a>
             <ModeToggle />
           </nav>
         </div>
