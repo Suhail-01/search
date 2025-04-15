@@ -35,93 +35,124 @@ function generateSearchResults(query: string): SearchResult[] {
   let results: SearchResult[] = [];
   
   if (queryLower.includes('ipl') || queryLower.includes('cricket')) {
-    // Cricket/IPL related results - Updated with latest 2024 information
+    // Cricket/IPL related results - Updated with latest 2025 information
     const today = new Date();
     const todayDate = today.getDate();
     const todayMonth = today.getMonth() + 1;
+    const year = 2025;
     
     results = [
       {
-        title: `IPL 2024 Today's Match: Rajasthan Royals vs Lucknow Super Giants (${todayDate}/${todayMonth}/2024)`,
-        description: `Watch live: RR vs LSG match starts at 7:30 PM IST. Rajasthan Royals aim to strengthen their playoff chances against struggling Lucknow Super Giants. Latest team news, playing XI, and expert predictions.`,
-        url: `https://www.cricbuzz.com/cricket-series/5945/indian-premier-league-2024/matches`
+        title: `IPL 2025 Today's Match: Mumbai Indians vs Chennai Super Kings (${todayDate}/${todayMonth}/${year})`,
+        description: `LIVE NOW: MI vs CSK match in progress. Rohit Sharma's century puts Mumbai in commanding position. Chennai struggling in run chase after losing early wickets. Watch live streaming and follow ball-by-ball updates.`,
+        url: `https://www.cricbuzz.com/cricket-series/6152/indian-premier-league-2025/matches`
       },
       {
-        title: `IPL 2024 Points Table: Updated After KKR vs SRH Match (${todayDate}/${todayMonth}/2024)`,
-        description: `Kolkata Knight Riders lead table with 14 points, followed by Rajasthan Royals (12 pts), Chennai Super Kings (10 pts), Sunrisers Hyderabad (10 pts). Latest standings with net run rates, wins, and losses.`,
-        url: `https://www.iplt20.com/points-table/men/2024`
+        title: `IPL 2025 Points Table: Latest Standings After RCB vs DC Match (${todayDate}/${todayMonth}/${year})`,
+        description: `Updated standings: Gujarat Titans (16 pts) on top, followed by Punjab Kings (14 pts), Mumbai Indians (12 pts), Rajasthan Royals (12 pts). Complete table with matches played, run rates, and qualification scenarios.`,
+        url: `https://www.iplt20.com/points-table/men/2025`
       },
       {
-        title: `BREAKING: Virat Kohli Reclaims Orange Cap with 430 Runs in IPL 2024`,
-        description: `RCB's star batter overtakes KL Rahul in run-scoring chart after yesterday's match-winning 83*. Top run-scorers: Kohli (430), Rahul (406), Jaiswal (388), Suryakumar (360), Samson (357).`,
-        url: `https://sports.ndtv.com/ipl-2024/stats/batting`
+        title: `TRENDING NOW: Rishabh Pant Sets IPL 2025 Record with Fastest Century`,
+        description: `Delhi Capitals captain smashes 100 off just 38 balls against RCB, breaking previous IPL record. Incredible innings included 8 fours and 10 sixes. Watch highlights of the record-breaking performance.`,
+        url: `https://sports.ndtv.com/ipl-2025/news/rishabh-pant-fastest-century-ipl-record`
       },
       {
-        title: `IPL 2024 Playoff Qualification Scenarios: Which Teams Can Still Qualify?`,
-        description: `Analysis of playoff chances for all ten teams with just 12 matches remaining. KKR and RR almost certain, while MI and DC require miracle runs. Mathematical possibilities and required results explained.`,
-        url: `https://www.espncricinfo.com/series/indian-premier-league-2024-1410320/points-table-standings`
+        title: `IPL 2025 Mega Auction Results: Complete List of Players Bought by All Teams`,
+        description: `Comprehensive guide to all player acquisitions from this season's auction. Australian all-rounder Cameron Green becomes most expensive player at ₹24 crore. Team-by-team analysis of squad strengths and weaknesses.`,
+        url: `https://www.espncricinfo.com/series/indian-premier-league-2025/news/complete-squad-list-ipl-2025`
       }
     ];
   } else if (queryLower.includes('weather')) {
-    // Weather related results
+    // Weather related results - updated for 2025
+    const today = new Date();
+    const todayDate = today.getDate();
+    const todayMonth = today.getMonth() + 1;
+    const year = 2025;
+    
     results = [
       {
-        title: `${query} - Current Weather Forecast, Hourly & 10-Day Outlook`,
-        description: `See the latest weather conditions for your area. Today's forecast: Partly cloudy with high of 75°F (24°C). 20% chance of precipitation. Wind: 5-10 mph.`,
+        title: `${query} Weather - Live Forecast for ${todayMonth}/${todayDate}/${year}`,
+        description: `CURRENT CONDITIONS: 72°F (22°C), Clear skies with light breeze. HOURLY FORECAST: Temperature rising to 78°F by noon. Evening forecast shows 30% chance of light showers after 8PM.`,
         url: `https://weather.com/forecast/local/${query}`
       },
       {
-        title: `Severe Weather Alert: Thunderstorms Expected This Weekend`,
-        description: `Weather service issues advisory for potential severe storms in multiple regions. Prepare for heavy rainfall and possible flash flooding in low-lying areas.`,
-        url: `https://www.accuweather.com/en/weather-news`
+        title: `Weather Alert System: New AI-Powered Prediction Models for 2025`,
+        description: `Weather services now using advanced neural network models providing 92% accurate forecasts up to 14 days ahead. Download the new app with personalized micro-climate predictions for your exact location.`,
+        url: `https://www.accuweather.com/en/new-forecast-technology-2025`
       },
       {
-        title: `Climate Patterns: How ${query} Weather Has Changed Over 50 Years`,
-        description: `Research shows significant shifts in seasonal patterns and temperature averages. Scientists track climate indicators including precipitation levels and extreme weather events.`,
-        url: `https://www.climate.gov/weather-trends`
+        title: `Summer 2025 Weather Outlook: Above Average Temperatures Expected`,
+        description: `Seasonal forecast predicts temperatures 2-3°F above historical averages across most regions. Drought conditions likely to persist in western areas with increased precipitation in northeastern regions.`,
+        url: `https://www.noaa.gov/news/summer-2025-outlook`
+      },
+      {
+        title: `Weather Radar Enhancement: New Satellite System Provides Real-Time Storm Tracking`,
+        description: `Revolutionary weather monitoring system launched in March 2025 now fully operational. Enhanced radar technology offers minute-by-minute precipitation tracking and improved tornado detection capabilities.`,
+        url: `https://www.weather.gov/enhanced-radar-2025`
       }
     ];
   } else if (queryLower.includes('wwe') || queryLower.includes('wrestling')) {
-    // WWE related results
+    // WWE related results - updated for 2025
+    const today = new Date();
+    const todayDate = today.getDate();
+    const todayMonth = today.getMonth() + 1;
+    const year = 2025;
+    
     results = [
       {
-        title: `WWE WrestleMania 40 Results: Complete Match Card Outcomes and Highlights`,
-        description: `Cody Rhodes defeats Roman Reigns to become new WWE Universal Champion. Full recap of all matches, surprise appearances, and biggest moments from the two-night event.`,
-        url: `https://www.wwe.com/shows/wrestlemania/wrestlemania-40-results`
+        title: `WWE WrestleMania 41 Results: New Champions Crowned in Epic Night (April 2025)`,
+        description: `Complete results from WrestleMania 41 in Las Vegas. Randy Orton makes shocking return to defeat Roman Reigns for Universal Championship. Full event recap with match ratings and post-event analysis.`,
+        url: `https://www.wwe.com/shows/wrestlemania/wrestlemania-41-results`
       },
       {
-        title: `WWE Raw Results: Updated Matches and Top Moments from Last Night`,
-        description: `Catch up on all the action from Monday Night Raw. Drew McIntyre confronts World Heavyweight Champion. Two championship matches announced for next week's show.`,
-        url: `https://www.cbssports.com/wwe/news/`
+        title: `BREAKING: WWE SmackDown Moving to Streaming Platform in August 2025`,
+        description: `WWE announces major broadcasting change for SmackDown starting August 1st. New partnership with streaming service includes exclusive content and interactive features for subscribers.`,
+        url: `https://www.cbssports.com/wwe/news/wwe-smackdown-streaming-deal-announced`
       },
       {
-        title: `Seth Rollins Injury Update: Timeline for WWE Superstar's Return`,
-        description: `Former champion provides latest on recovery progress after surgery. Medical team estimates potential return date. Impact on upcoming WWE premium live events and storylines.`,
-        url: `https://wrestlingnews.com/seth-rollins-injury-status`
+        title: `Tonight's WWE Raw Card (${todayMonth}/${todayDate}/${year}): Championship Matches and Returns`,
+        description: `Full preview of tonight's Monday Night Raw featuring World Heavyweight Championship match between Finn Balor and Gunther. Special appearance by John Cena expected. How to watch and match predictions.`,
+        url: `https://wrestletalk.com/news/wwe-raw-preview-tonight`
+      },
+      {
+        title: `WWE 2025 Draft Results: Complete Roster Changes and Surprise Picks`,
+        description: `All roster moves from the 2025 WWE Draft. Raw and SmackDown rosters completely reshuffled with NXT call-ups. Winners and losers from draft decisions and upcoming feuds to watch.`,
+        url: `https://www.sportskeeda.com/wwe/2025-wwe-draft-complete-results`
       }
     ];
   } else if (queryLower.includes('climate') || queryLower.includes('environment')) {
-    // Climate change related results
+    // Climate change related results - updated for 2025
+    const today = new Date();
+    const todayDate = today.getDate();
+    const todayMonth = today.getMonth() + 1;
+    const year = 2025;
+    
     results = [
       {
-        title: `Climate Change: Latest Data Shows Accelerating Global Temperature Rise`,
-        description: `New research confirms 2023 as hottest year on record with 1.5°C increase above pre-industrial levels. Scientists warn of potential tipping points in climate systems if trends continue.`,
-        url: `https://climate.nasa.gov/evidence/`
+        title: `2025 Climate Assessment: Global Temperatures Reach New Record High`,
+        description: `BREAKING: Latest data confirms 2024 surpassed 2023 as hottest year on record, marking 1.7°C above pre-industrial levels. Scientists warn critical tipping points may be approaching faster than previously predicted.`,
+        url: `https://climate.nasa.gov/vital-signs/global-temperature/`
       },
       {
-        title: `UN Climate Report: Urgent Action Needed to Limit Warming to 1.5°C`,
-        description: `IPCC findings show current policies insufficient to meet Paris Agreement goals. Report outlines critical steps needed in next decade to prevent worst climate scenarios.`,
-        url: `https://www.ipcc.ch/reports/`
+        title: `COP30 Summit: Nations Agree to Historic Carbon Reduction Targets for 2025-2030`,
+        description: `Major breakthrough at climate conference as 198 countries endorse binding emissions targets. New framework includes financial mechanisms to support developing nations and accelerated timeline for fossil fuel phase-out.`,
+        url: `https://www.un.org/climate-action/cop30-agreement`
       },
       {
-        title: `How Climate Change Is Affecting Weather Patterns Worldwide`,
-        description: `Scientists link increasing frequency of extreme weather events to climate change. Studies show connections between warming temperatures and intensified hurricanes, droughts, and flooding.`,
-        url: `https://www.noaa.gov/climate-change-impacts`
+        title: `EU's Green Transition Achievement: 45% Renewable Energy Milestone Reached`,
+        description: `European Union announces renewable sources now account for 45% of total energy production, three years ahead of schedule. Success attributed to massive offshore wind expansion and innovative energy storage solutions.`,
+        url: `https://ec.europa.eu/environment/climate-action/renewable-energy-report-2025`
       },
       {
-        title: `Renewable Energy Growth Accelerates in Response to Climate Crisis`,
-        description: `Solar and wind capacity doubled in past five years. Countries announce ambitious targets to reduce carbon emissions. Investment in clean technology reaches record levels.`,
-        url: `https://www.iea.org/topics/renewables`
+        title: `Climate Adaptation Report 2025: Communities Implementing Resilience Strategies`,
+        description: `New study examines successful climate adaptation measures in vulnerable regions. Case studies highlight innovative approaches to flood protection, drought management, and heat mitigation in urban areas.`,
+        url: `https://www.ipcc.ch/report/adaptation-resilience-2025/`
+      },
+      {
+        title: `Carbon Capture Technology Breakthrough Announced Today (${todayMonth}/${todayDate}/${year})`,
+        description: `Scientists reveal new process that removes atmospheric CO2 at 3x efficiency of previous methods with 70% lower costs. Technology demonstration projects launching in multiple countries this year with industrial scaling planned for 2026.`,
+        url: `https://www.sciencedaily.com/releases/2025/04/2504150832.htm`
       }
     ];
   } else {
@@ -258,33 +289,74 @@ export default function SearchResults() {
                 );
               })}
               
-              {/* Add "People also ask" section like Google */}
+              {/* Add "People also ask" section like Google with contextual questions */}
               <div className="border rounded-lg p-4 my-6">
                 <h3 className="text-lg font-medium mb-3">People also ask</h3>
                 <div className="space-y-2">
-                  {["What is the best resource for " + query + "?", 
-                    "How does " + query + " work?", 
-                    "Why is " + query + " important?"].map((question, i) => (
-                    <div key={i} className="border-b pb-2 last:border-b-0">
-                      <button className="flex justify-between items-center w-full text-left hover:bg-muted/50 rounded p-2">
-                        <span>{question}</span>
-                        <svg 
-                          xmlns="http://www.w3.org/2000/svg" 
-                          width="16" 
-                          height="16" 
-                          viewBox="0 0 24 24" 
-                          fill="none" 
-                          stroke="currentColor" 
-                          strokeWidth="2" 
-                          strokeLinecap="round" 
-                          strokeLinejoin="round"
-                          className="text-muted-foreground"
-                        >
-                          <polyline points="6 9 12 15 18 9"></polyline>
-                        </svg>
-                      </button>
-                    </div>
-                  ))}
+                  {(() => {
+                    // Generate context-specific questions based on query content
+                    let questions = [];
+                    
+                    if (query.toLowerCase().includes('ipl') || query.toLowerCase().includes('cricket')) {
+                      questions = [
+                        `When is the next IPL match in 2025?`,
+                        `Which team is leading the IPL 2025 points table?`,
+                        `Who is the highest run-scorer in IPL 2025?`,
+                        `What are the IPL 2025 playoff qualification scenarios?`
+                      ];
+                    } else if (query.toLowerCase().includes('wwe') || query.toLowerCase().includes('wrestling')) {
+                      questions = [
+                        `When is the next WWE pay-per-view event in 2025?`,
+                        `Who is the current WWE Universal Champion?`,
+                        `What are the upcoming WWE events in 2025?`,
+                        `Why did WWE move SmackDown to streaming platforms?`
+                      ];
+                    } else if (query.toLowerCase().includes('climate') || query.toLowerCase().includes('environment')) {
+                      questions = [
+                        `What are the latest climate change statistics for 2025?`,
+                        `How has global temperature changed in the last decade?`,
+                        `What countries are meeting their carbon reduction targets?`,
+                        `What new climate technologies were developed in 2025?`
+                      ];
+                    } else if (query.toLowerCase().includes('weather')) {
+                      questions = [
+                        `What is the forecast for this weekend?`,
+                        `How accurate are the new weather prediction models?`,
+                        `Will there be severe weather in my area soon?`,
+                        `How has the weather pattern changed in 2025?`
+                      ];
+                    } else {
+                      // Default questions for any other query
+                      questions = [
+                        `What is the best resource for ${query}?`,
+                        `How does ${query} work?`,
+                        `Why is ${query} important in 2025?`,
+                        `What are the latest developments in ${query}?`
+                      ];
+                    }
+                    
+                    return questions.map((question, i) => (
+                      <div key={i} className="border-b pb-2 last:border-b-0">
+                        <button className="flex justify-between items-center w-full text-left hover:bg-muted/50 rounded p-2">
+                          <span>{question}</span>
+                          <svg 
+                            xmlns="http://www.w3.org/2000/svg" 
+                            width="16" 
+                            height="16" 
+                            viewBox="0 0 24 24" 
+                            fill="none" 
+                            stroke="currentColor" 
+                            strokeWidth="2" 
+                            strokeLinecap="round" 
+                            strokeLinejoin="round"
+                            className="text-muted-foreground"
+                          >
+                            <polyline points="6 9 12 15 18 9"></polyline>
+                          </svg>
+                        </button>
+                      </div>
+                    ));
+                  })()}
                 </div>
               </div>
             </div>
