@@ -1,7 +1,7 @@
 import React from "react";
 import { Link } from "wouter";
 import { ModeToggle } from "@/components/ui/mode-toggle";
-import { Droplet } from "lucide-react";
+import { Search } from "lucide-react";
 
 export default function Header() {
   return (
@@ -10,8 +10,8 @@ export default function Header() {
         <div className="flex items-center space-x-2 mr-4">
           <Link href="/">
             <div className="flex items-center space-x-2 cursor-pointer">
-              <Droplet className="h-6 w-6 text-primary" />
-              <span className="font-bold text-xl">HydroTracker</span>
+              <Search className="h-6 w-6 text-primary" />
+              <span className="font-bold text-xl">AI Smart Search</span>
             </div>
           </Link>
         </div>
@@ -20,16 +20,19 @@ export default function Header() {
         
         <div className="flex items-center justify-end space-x-4">
           <nav className="flex items-center space-x-4">
-            <Link href="/dashboard">
+            <Link href="https://api.datamuse.com" target="_blank">
               <span className="text-sm font-medium transition-colors hover:text-primary cursor-pointer">
-                Dashboard
+                API Docs
               </span>
             </Link>
-            <Link href="/settings">
-              <span className="text-sm font-medium transition-colors hover:text-primary cursor-pointer">
-                Settings
-              </span>
-            </Link>
+            <a 
+              href="https://github.com" 
+              target="_blank" 
+              rel="noopener noreferrer"
+              className="text-sm font-medium transition-colors hover:text-primary"
+            >
+              GitHub
+            </a>
             <ModeToggle />
           </nav>
         </div>
