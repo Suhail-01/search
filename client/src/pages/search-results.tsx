@@ -35,22 +35,31 @@ function generateSearchResults(query: string): SearchResult[] {
   let results: SearchResult[] = [];
   
   if (queryLower.includes('ipl') || queryLower.includes('cricket')) {
-    // Cricket/IPL related results
+    // Cricket/IPL related results - Updated with latest 2024 information
+    const today = new Date();
+    const todayDate = today.getDate();
+    const todayMonth = today.getMonth() + 1;
+    
     results = [
       {
-        title: `IPL 2024: Latest Scores, Schedule and Team Rankings`,
-        description: `Get today's IPL match updates, live scores, team standings, and upcoming fixtures for the 2024 Indian Premier League season. Find player stats and team performance analysis.`,
-        url: `https://www.cricbuzz.com/cricket-series/5945/indian-premier-league-2024`
+        title: `IPL 2024 Today's Match: Rajasthan Royals vs Lucknow Super Giants (${todayDate}/${todayMonth}/2024)`,
+        description: `Watch live: RR vs LSG match starts at 7:30 PM IST. Rajasthan Royals aim to strengthen their playoff chances against struggling Lucknow Super Giants. Latest team news, playing XI, and expert predictions.`,
+        url: `https://www.cricbuzz.com/cricket-series/5945/indian-premier-league-2024/matches`
       },
       {
-        title: `MI vs CSK Highlights: Chennai Super Kings win by 20 runs`,
-        description: `Watch full match highlights of Mumbai Indians vs Chennai Super Kings. Ravindra Jadeja's all-round performance helps CSK secure crucial victory in yesterday's thrilling encounter.`,
-        url: `https://www.iplt20.com/matches/results`
+        title: `IPL 2024 Points Table: Updated After KKR vs SRH Match (${todayDate}/${todayMonth}/2024)`,
+        description: `Kolkata Knight Riders lead table with 14 points, followed by Rajasthan Royals (12 pts), Chennai Super Kings (10 pts), Sunrisers Hyderabad (10 pts). Latest standings with net run rates, wins, and losses.`,
+        url: `https://www.iplt20.com/points-table/men/2024`
       },
       {
-        title: `IPL 2024 Points Table: RCB moves to 4th position after win against DC`,
-        description: `Updated IPL standings after yesterday's matches. Royal Challengers Bangalore climbs to playoff position with impressive run chase. Check the complete points table and playoff scenarios.`,
-        url: `https://sports.ndtv.com/ipl-2024/points-table`
+        title: `BREAKING: Virat Kohli Reclaims Orange Cap with 430 Runs in IPL 2024`,
+        description: `RCB's star batter overtakes KL Rahul in run-scoring chart after yesterday's match-winning 83*. Top run-scorers: Kohli (430), Rahul (406), Jaiswal (388), Suryakumar (360), Samson (357).`,
+        url: `https://sports.ndtv.com/ipl-2024/stats/batting`
+      },
+      {
+        title: `IPL 2024 Playoff Qualification Scenarios: Which Teams Can Still Qualify?`,
+        description: `Analysis of playoff chances for all ten teams with just 12 matches remaining. KKR and RR almost certain, while MI and DC require miracle runs. Mathematical possibilities and required results explained.`,
+        url: `https://www.espncricinfo.com/series/indian-premier-league-2024-1410320/points-table-standings`
       }
     ];
   } else if (queryLower.includes('weather')) {
