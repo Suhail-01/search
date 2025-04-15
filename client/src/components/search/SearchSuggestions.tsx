@@ -1,6 +1,8 @@
 import React from "react";
-import { highlightText } from "@/utils/highlight-text";
+import { Search } from "lucide-react";
 import { Suggestion } from "@/lib/datamuse";
+import { highlightText } from "@/utils/highlight-text";
+import { cn } from "@/lib/utils";
 
 interface SearchSuggestionsProps {
   suggestions: Suggestion[];
@@ -12,35 +14,31 @@ interface SearchSuggestionsProps {
 export default function SearchSuggestions({ 
   suggestions, 
   query, 
-  selectedIndex,
+  selectedIndex, 
   onSuggestionClick 
 }: SearchSuggestionsProps) {
-  if (!suggestions.length) return null;
-  
+  if (suggestions.length === 0) {
+    return (
+      <div className="p-4 text-center text-muted-foreground">
+        No suggestions found
+      </div>
+    );
+  }
+
   return (
-    <ul 
-      id="search-suggestions" 
-      className="py-1" 
-      role="listbox"
-      aria-label="Search suggestions"
-    >
+    <ul className="py-2">
       {suggestions.map((suggestion, index) => (
         <li 
           key={`${suggestion.word}-${index}`}
-          role="option"
-          aria-selected={index === selectedIndex}
-          className={`
-            px-4 py-2 text-sm cursor-pointer flex items-center
-            ${index === selectedIndex ? 'bg-muted' : 'hover:bg-muted/50'}
-          `}
+          className={cn(
+            "flex items-center px-4 py-2 cursor-pointer hover:bg-muted/50 transition-colors",
+            index === selectedIndex && "bg-muted"
+          )}
           onClick={() => onSuggestionClick(suggestion.word)}
+          onMouseEnter={() => {/* Could update selected index on hover */}}
         >
-          <div className="flex-1 truncate">
-            {highlightText(suggestion.word, query)}
-          </div>
-          <div className="text-xs text-muted-foreground ml-2">
-            {suggestion.score > 900 ? 'Popular' : ''}
-          </div>
+          <Search className="h-4 w-4 mr-2 flex-shrink-0 text-muted-foreground" />
+          <span>{highlightText(suggestion.word, query)}</span>
         </li>
       ))}
     </ul>
