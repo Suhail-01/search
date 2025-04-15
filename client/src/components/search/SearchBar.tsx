@@ -1,19 +1,33 @@
 import React, { useState, useRef, useEffect, KeyboardEvent } from "react";
 import { Search } from "lucide-react";
+import { useLocation } from "wouter";
 import { Input } from "@/components/ui/input";
 import { Button } from "@/components/ui/button";
 import { useSuggestions } from "@/hooks/use-suggestions";
 import SearchSuggestions from "./SearchSuggestions";
 import TrendingSuggestions from "./TrendingSuggestions";
 
-export default function SearchBar() {
-  const [query, setQuery] = useState<string>("");
+interface SearchBarProps {
+  initialQuery?: string;
+  onSearch?: (query: string) => void;
+}
+
+export default function SearchBar({ initialQuery = "", onSearch }: SearchBarProps) {
+  const [, navigate] = useLocation();
+  const [query, setQuery] = useState<string>(initialQuery);
   const [isFocused, setIsFocused] = useState<boolean>(false);
   const [selectedIndex, setSelectedIndex] = useState<number>(-1);
   const inputRef = useRef<HTMLInputElement>(null);
   const { suggestions, loading } = useSuggestions(query);
   
   const showSuggestions = isFocused && (suggestions.length > 0 || query.trim() === "");
+  
+  // Update query if initialQuery changes (for controlled component behavior)
+  useEffect(() => {
+    if (initialQuery !== query) {
+      setQuery(initialQuery);
+    }
+  }, [initialQuery]);
   
   // Reset selected index when suggestions change
   useEffect(() => {
@@ -33,12 +47,13 @@ export default function SearchBar() {
     } else if (e.key === "Enter") {
       if (selectedIndex >= 0 && selectedIndex < suggestions.length) {
         // Use the selected suggestion
-        handleSuggestionClick(suggestions[selectedIndex].word);
+        const selectedQuery = suggestions[selectedIndex].word;
+        handleSuggestionClick(selectedQuery);
         // Submit the form or perform search
-        handleSearch();
+        handleSearch(selectedQuery);
       } else {
         // Just search with the current query
-        handleSearch();
+        handleSearch(query);
       }
     } else if (e.key === "Escape") {
       // Close suggestions and blur input
@@ -47,19 +62,26 @@ export default function SearchBar() {
     }
   };
   
-  const handleSearch = () => {
-    if (query.trim()) {
-      console.log(`Searching for: ${query}`);
-      // Here you would typically redirect to a search results page or perform a search
-      // For this example, we'll just log the query
+  const handleSearch = (searchQuery: string = query) => {
+    if (searchQuery.trim()) {
+      console.log(`Searching for: ${searchQuery}`);
+      
+      // If onSearch prop is provided, use that
+      if (onSearch) {
+        onSearch(searchQuery);
+      } else {
+        // Otherwise navigate to search results page
+        navigate(`/search?q=${encodeURIComponent(searchQuery)}`);
+      }
+      
+      // Hide suggestions after search
+      setIsFocused(false);
     }
   };
   
   const handleSuggestionClick = (suggestion: string) => {
     setQuery(suggestion);
     inputRef.current?.focus();
-    // Optional: automatically perform search on selection
-    // handleSearch();
   };
   
   return (
@@ -84,7 +106,7 @@ export default function SearchBar() {
           variant="ghost" 
           size="icon" 
           className="absolute right-1"
-          onClick={handleSearch}
+          onClick={() => handleSearch()}
         >
           <Search className="h-5 w-5 text-muted-foreground" />
         </Button>
@@ -98,10 +120,20 @@ export default function SearchBar() {
               suggestions={suggestions} 
               query={query}
               selectedIndex={selectedIndex}
-              onSuggestionClick={handleSuggestionClick}
+              onSuggestionClick={(suggestion) => {
+                handleSuggestionClick(suggestion);
+                // Automatically search when clicking a suggestion
+                handleSearch(suggestion);
+              }}
             />
           ) : (
-            <TrendingSuggestions onSuggestionClick={handleSuggestionClick} />
+            <TrendingSuggestions 
+              onSuggestionClick={(suggestion) => {
+                handleSuggestionClick(suggestion);
+                // Automatically search when clicking a trending suggestion
+                handleSearch(suggestion);
+              }}
+            />
           )}
         </div>
       )}
