@@ -1,0 +1,94 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1" />
+    <title>AI Smart Search - Intelligent Auto-Complete</title>
+    <meta name="description" content="AI-powered search with intelligent auto-complete and real-time suggestions" />
+    <link rel="icon" type="image/svg+xml" href="data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHZpZXdCb3g9IjAgMCAyNCAyNCIgZmlsbD0ibm9uZSIgc3Ryb2tlPSIjMzQ4MWY2IiBzdHJva2Utd2lkdGg9IjIiIHN0cm9rZS1saW5lY2FwPSJyb3VuZCIgc3Ryb2tlLWxpbmVqb2luPSJyb3VuZCIgY2xhc3M9Imx1Y2lkZSBsdWNpZGUtc2VhcmNoIj48Y2lyY2xlIGN4PSIxMSIgY3k9IjExIiByPSI4Ii8+PHBhdGggZD0ibTIxIDIxLTQuMzUtNC4zNSIvPjwvc3ZnPg==" />
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+    <style>
+      body, html {
+        margin: 0;
+        padding: 0;
+        font-family: 'Inter', sans-serif;
+        background: #f9fafb;
+        height: 100%;
+        width: 100%;
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        justify-content: center;
+      }
+      .container {
+        text-align: center;
+        max-width: 600px;
+        padding: 2rem;
+      }
+      h1 {
+        color: #3481f6;
+        font-size: 2.5rem;
+        margin-bottom: 1rem;
+        background: linear-gradient(135deg, #3481f6, #6366f1);
+        -webkit-background-clip: text;
+        -webkit-text-fill-color: transparent;
+      }
+      p {
+        color: #6b7280;
+        font-size: 1.1rem;
+        line-height: 1.6;
+        margin-bottom: 2rem;
+      }
+      .search-icon {
+        width: 80px;
+        height: 80px;
+        margin-bottom: 1.5rem;
+      }
+      .btn {
+        background: linear-gradient(135deg, #3481f6, #6366f1);
+        color: white;
+        border: none;
+        padding: 0.75rem 1.5rem;
+        font-size: 1rem;
+        font-weight: 500;
+        border-radius: 0.375rem;
+        cursor: pointer;
+        transition: all 0.2s ease;
+        text-decoration: none;
+        display: inline-block;
+      }
+      .btn:hover {
+        opacity: 0.9;
+        transform: translateY(-2px);
+      }
+      .loading {
+        margin-top: 2rem;
+        font-size: 0.9rem;
+        color: #6b7280;
+      }
+    </style>
+  </head>
+  <body>
+    <div class="container">
+      <svg class="search-icon" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="#3481f6" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+        <circle cx="11" cy="11" r="8"/>
+        <path d="m21 21-4.35-4.35"/>
+      </svg>
+      <h1>AI Smart Search</h1>
+      <p>Intelligent auto-complete search with real-time suggestions powered by AI. Experience Google-like search results with our cutting-edge search technology.</p>
+      <a href="./client/" class="btn">Launch App</a>
+      <p class="loading">Loading application, please wait...</p>
+    </div>
+
+    <script>
+      // Automatic redirect to the app
+      window.onload = function() {
+        setTimeout(function() {
+          window.location.href = './client/';
+        }, 1500); // Redirect after 1.5 seconds
+      }
+    </script>
+  </body>
+</html>
