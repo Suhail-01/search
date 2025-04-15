@@ -1,0 +1,112 @@
+🔍 Replit Project Prompt: AI-Powered Auto-Complete Search App (Frontend-Only, GitHub Pages Deployable)
+📌 Project Title:
+AI Smart Search – Auto-Complete Search Bar with Real-Time AI Suggestions
+
+🎯 Objective
+Build a fully responsive web application that mimics intelligent search bar systems like Google or Amazon, enhanced with AI-generated suggestions using the Datamuse API and optionally OpenAI (if available).
+
+The app should be deployable on GitHub Pages and feature dynamic suggestions, real-time API integration, intuitive UX, and clean UI.
+
+🧠 Core Features
+✅ Real-time auto-complete suggestions from AI APIs
+
+✅ Debounced API requests to reduce spam calls
+
+✅ Support for keyboard navigation (↑ ↓ Enter)
+
+✅ Trending or popular default suggestions
+
+✅ Highlighting matched terms in suggestions
+
+✅ Mobile responsive and dark mode toggle
+
+🛠️ Tech Stack
+Frontend Only (HTML, CSS, JavaScript)
+
+Hosted on GitHub Pages (no backend needed)
+
+Suggestions from:
+
+✅ Datamuse API (free, no auth required)
+
+✅ Optionally integrate OpenAI GPT (for semantic/phrase-based suggestions)
+
+🚀 Project Steps
+HTML Structure
+
+Input field
+
+Suggestion dropdown
+
+Title/Header section
+
+CSS Styling
+
+Use modern styles or TailwindCSS for responsiveness
+
+Optional: Dark mode toggle
+
+JavaScript Functionality
+
+Fetch suggestions from Datamuse:
+
+arduino
+Copy
+Edit
+https://api.datamuse.com/sug?s=your_query
+Display suggestion list in real-time
+
+Use debounce (e.g., 300ms delay)
+
+Enable up/down key navigation
+
+(Optional Bonus): AI Phrase Suggestions using OpenAI
+
+Use GPT to return search phrase variations
+
+Example prompt:
+
+sql
+Copy
+Edit
+Suggest 5 user-friendly search phrases related to: "machine learning"
+Deployment
+
+Push project to GitHub
+
+Enable GitHub Pages in repo settings
+
+Access your app from:
+https://your-username.github.io/your-repo-name/
+
+📁 Folder Structure
+pgsql
+Copy
+Edit
+/ai-autocomplete-search
+├── index.html
+├── styles.css
+├── script.js
+└── README.md
+🔗 External APIs to Use
+🔸 Datamuse API – https://api.datamuse.com/sug?s=term
+
+🔸 OpenAI API (Optional) – https://platform.openai.com/docs/api-reference/completions
+
+📌 Extra Add-ons (Optional)
+🔊 Voice search using Web Speech API
+
+🌙 Dark mode toggle with localStorage
+
+📈 Trending keywords (mock data or actual API)
+
+✅ ARIA accessibility roles
+
+📦 Deliverables
+🖥 Live URL via GitHub Pages
+
+📂 Clean GitHub repo with README and screenshots
+
+📸 Demo GIF or video (optional)
+
+💬 Optionally submit to dev.to or Hashnode as a blog post
