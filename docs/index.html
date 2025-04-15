@@ -1,0 +1,654 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1" />
+    <title>AI Smart Search - Intelligent Auto-Complete</title>
+    <meta name="description" content="AI-powered search with intelligent auto-complete and real-time suggestions" />
+    <link rel="icon" type="image/svg+xml" href="data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHZpZXdCb3g9IjAgMCAyNCAyNCIgZmlsbD0ibm9uZSIgc3Ryb2tlPSIjMzQ4MWY2IiBzdHJva2Utd2lkdGg9IjIiIHN0cm9rZS1saW5lY2FwPSJyb3VuZCIgc3Ryb2tlLWxpbmVqb2luPSJyb3VuZCIgY2xhc3M9Imx1Y2lkZSBsdWNpZGUtc2VhcmNoIj48Y2lyY2xlIGN4PSIxMSIgY3k9IjExIiByPSI4Ii8+PHBhdGggZD0ibTIxIDIxLTQuMzUtNC4zNSIvPjwvc3ZnPg==" />
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+    <style>
+      /* Base styles */
+      *, *::before, *::after {
+        box-sizing: border-box;
+      }
+      
+      body, html {
+        margin: 0;
+        padding: 0;
+        font-family: 'Inter', sans-serif;
+        background: #f9fafb;
+        min-height: 100vh;
+        color: #333;
+        line-height: 1.5;
+      }
+      
+      /* Header */
+      header {
+        background: white;
+        box-shadow: 0 1px 3px rgba(0, 0, 0, 0.1);
+        padding: 1rem 0;
+      }
+      
+      .container {
+        max-width: 1200px;
+        margin: 0 auto;
+        padding: 0 1.5rem;
+      }
+      
+      .header-content {
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+      }
+      
+      .logo {
+        display: flex;
+        align-items: center;
+        font-weight: 700;
+        font-size: 1.25rem;
+        color: #3b82f6;
+        text-decoration: none;
+      }
+      
+      .logo svg {
+        margin-right: 0.5rem;
+        width: 24px;
+        height: 24px;
+      }
+      
+      /* Main Content */
+      main {
+        padding: 2rem 0;
+        min-height: calc(100vh - 74px - 60px);
+      }
+      
+      .hero {
+        text-align: center;
+        padding: 4rem 1rem;
+        max-width: 800px;
+        margin: 0 auto;
+      }
+      
+      h1 {
+        font-size: 2.5rem;
+        margin-bottom: 1rem;
+        background: linear-gradient(135deg, #3b82f6, #6366f1);
+        -webkit-background-clip: text;
+        -webkit-text-fill-color: transparent;
+        line-height: 1.2;
+      }
+      
+      .hero p {
+        font-size: 1.125rem;
+        color: #6b7280;
+        margin-bottom: 2rem;
+      }
+      
+      /* Search Bar */
+      .search-container {
+        max-width: 600px;
+        margin: 0 auto;
+        position: relative;
+      }
+      
+      .search-bar {
+        width: 100%;
+        padding: 0.75rem 1rem 0.75rem 3rem;
+        border: 1px solid #d1d5db;
+        border-radius: 9999px;
+        font-size: 1rem;
+        outline: none;
+        box-shadow: 0 1px 3px rgba(0, 0, 0, 0.1);
+        transition: all 0.2s ease;
+      }
+      
+      .search-bar:focus {
+        border-color: #3b82f6;
+        box-shadow: 0 0 0 3px rgba(59, 130, 246, 0.3);
+      }
+      
+      .search-icon {
+        position: absolute;
+        left: 1rem;
+        top: 50%;
+        transform: translateY(-50%);
+        color: #9ca3af;
+      }
+      
+      /* Search Suggestions */
+      .search-suggestions {
+        position: absolute;
+        top: calc(100% + 0.5rem);
+        left: 0;
+        right: 0;
+        background: white;
+        border-radius: 0.5rem;
+        box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1), 0 2px 4px -1px rgba(0, 0, 0, 0.06);
+        overflow: hidden;
+        z-index: 10;
+        display: none;
+      }
+      
+      .search-suggestions.show {
+        display: block;
+      }
+      
+      .suggestion-item {
+        padding: 0.75rem 1rem;
+        border-bottom: 1px solid #f3f4f6;
+        cursor: pointer;
+        transition: background-color 0.2s ease;
+      }
+      
+      .suggestion-item:hover, .suggestion-item.selected {
+        background-color: #f3f4f6;
+      }
+      
+      .suggestion-item:last-child {
+        border-bottom: none;
+      }
+      
+      /* Trending Searches */
+      .trending {
+        margin-top: 3rem;
+        text-align: center;
+      }
+      
+      .trending h2 {
+        font-size: 1.25rem;
+        color: #4b5563;
+        margin-bottom: 1rem;
+        font-weight: 600;
+      }
+      
+      .trending-tags {
+        display: flex;
+        flex-wrap: wrap;
+        justify-content: center;
+        gap: 0.5rem;
+      }
+      
+      .trending-tag {
+        background: white;
+        border: 1px solid #e5e7eb;
+        padding: 0.5rem 1rem;
+        border-radius: 9999px;
+        font-size: 0.875rem;
+        cursor: pointer;
+        transition: all 0.2s ease;
+      }
+      
+      .trending-tag:hover {
+        background: #f3f4f6;
+        border-color: #d1d5db;
+      }
+      
+      /* Mock Search Results */
+      .search-results {
+        max-width: 800px;
+        margin: 2rem auto;
+        background: white;
+        border-radius: 0.5rem;
+        box-shadow: 0 1px 3px rgba(0, 0, 0, 0.1);
+        padding: 1.5rem;
+        display: none;
+      }
+      
+      .search-results.show {
+        display: block;
+      }
+      
+      .result-count {
+        font-size: 0.875rem;
+        color: #6b7280;
+        margin-bottom: 1.5rem;
+      }
+      
+      .result-item {
+        margin-bottom: 1.5rem;
+        padding-bottom: 1.5rem;
+        border-bottom: 1px solid #f3f4f6;
+      }
+      
+      .result-item:last-child {
+        margin-bottom: 0;
+        padding-bottom: 0;
+        border-bottom: none;
+      }
+      
+      .result-domain {
+        display: flex;
+        align-items: center;
+        font-size: 0.875rem;
+        color: #6b7280;
+        margin-bottom: 0.25rem;
+      }
+      
+      .domain-icon {
+        width: 16px;
+        height: 16px;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        background: rgba(59, 130, 246, 0.1);
+        color: #3b82f6;
+        border-radius: 50%;
+        margin-right: 0.5rem;
+        font-size: 0.6rem;
+        font-weight: 500;
+      }
+      
+      .result-title {
+        color: #1d4ed8;
+        font-size: 1.25rem;
+        font-weight: 500;
+        margin: 0.25rem 0;
+        display: block;
+        text-decoration: none;
+      }
+      
+      .result-title:hover {
+        text-decoration: underline;
+      }
+      
+      .result-url {
+        font-size: 0.75rem;
+        color: #15803d;
+        margin-bottom: 0.5rem;
+      }
+      
+      .result-description {
+        font-size: 0.875rem;
+        color: #4b5563;
+        line-height: 1.5;
+      }
+      
+      .people-also-ask {
+        margin: 2rem 0;
+        background: white;
+        border-radius: 0.5rem;
+        border: 1px solid #e5e7eb;
+        overflow: hidden;
+      }
+      
+      .ask-title {
+        padding: 1rem 1.5rem;
+        font-weight: 600;
+        border-bottom: 1px solid #f3f4f6;
+      }
+      
+      .ask-item {
+        padding: 1rem 1.5rem;
+        border-bottom: 1px solid #f3f4f6;
+        cursor: pointer;
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+      }
+      
+      .ask-item:last-child {
+        border-bottom: none;
+      }
+      
+      .ask-item:hover {
+        background: #f9fafb;
+      }
+      
+      /* Footer */
+      footer {
+        background: white;
+        border-top: 1px solid #e5e7eb;
+        padding: 1rem 0;
+      }
+      
+      .footer-content {
+        text-align: center;
+        font-size: 0.875rem;
+        color: #6b7280;
+      }
+      
+      /* Search Results Button (for demo) */
+      .show-results-btn {
+        display: inline-block;
+        margin-top: 1rem;
+        background: #3b82f6;
+        color: white;
+        border: none;
+        padding: 0.75rem 1.5rem;
+        border-radius: 0.375rem;
+        font-size: 1rem;
+        font-weight: 500;
+        cursor: pointer;
+        transition: background-color 0.2s ease;
+      }
+      
+      .show-results-btn:hover {
+        background: #2563eb;
+      }
+      
+      /* Media Queries */
+      @media (max-width: 640px) {
+        h1 {
+          font-size: 2rem;
+        }
+        
+        .hero p {
+          font-size: 1rem;
+        }
+      }
+    </style>
+  </head>
+  <body>
+    <header>
+      <div class="container">
+        <div class="header-content">
+          <a href="#" class="logo">
+            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+              <circle cx="11" cy="11" r="8"/>
+              <path d="m21 21-4.35-4.35"/>
+            </svg>
+            AI Smart Search
+          </a>
+        </div>
+      </div>
+    </header>
+    
+    <main>
+      <div class="hero">
+        <h1>AI-Powered Smart Search</h1>
+        <p>Experience intelligent auto-complete and get real-time suggestions as you type. Our advanced search technology provides Google-like results for any query with the latest information from 2025.</p>
+        
+        <div class="search-container">
+          <input type="text" class="search-bar" placeholder="Search for anything..." id="search-input">
+          <svg class="search-icon" xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+            <circle cx="11" cy="11" r="8"/>
+            <path d="m21 21-4.35-4.35"/>
+          </svg>
+          <div class="search-suggestions" id="search-suggestions"></div>
+        </div>
+        
+        <button class="show-results-btn" id="show-results-btn">View Sample Search Results</button>
+        
+        <div class="trending">
+          <h2>Trending Searches</h2>
+          <div class="trending-tags">
+            <span class="trending-tag" onclick="setSearchInput('ipl 2025')">IPL 2025</span>
+            <span class="trending-tag" onclick="setSearchInput('climate change')">Climate Change</span>
+            <span class="trending-tag" onclick="setSearchInput('weather forecast')">Weather Forecast</span>
+            <span class="trending-tag" onclick="setSearchInput('wwe wrestlemania')">WWE WrestleMania</span>
+            <span class="trending-tag" onclick="setSearchInput('ai technology')">AI Technology</span>
+          </div>
+        </div>
+      </div>
+      
+      <!-- Mock Search Results (demo only) -->
+      <div class="search-results" id="mock-results">
+        <div class="result-count">About 5 results for "<span id="result-query">ipl 2025</span>"</div>
+        
+        <div class="result-item">
+          <div class="result-domain">
+            <div class="domain-icon">C</div>
+            <span>cricbuzz.com</span>
+          </div>
+          <a href="#" class="result-title">IPL 2025 Today's Match: Mumbai Indians vs Chennai Super Kings (15/4/2025)</a>
+          <div class="result-url">https://www.cricbuzz.com/cricket-series/6152/indian-premier-league-2025/matches</div>
+          <div class="result-description">LIVE NOW: MI vs CSK match in progress. Rohit Sharma's century puts Mumbai in commanding position. Chennai struggling in run chase after losing early wickets. Watch live streaming and follow ball-by-ball updates.</div>
+        </div>
+        
+        <div class="result-item">
+          <div class="result-domain">
+            <div class="domain-icon">I</div>
+            <span>iplt20.com</span>
+          </div>
+          <a href="#" class="result-title">IPL 2025 Points Table: Latest Standings After RCB vs DC Match (15/4/2025)</a>
+          <div class="result-url">https://www.iplt20.com/points-table/men/2025</div>
+          <div class="result-description">Updated standings: Gujarat Titans (16 pts) on top, followed by Punjab Kings (14 pts), Mumbai Indians (12 pts), Rajasthan Royals (12 pts). Complete table with matches played, run rates, and qualification scenarios.</div>
+        </div>
+        
+        <div class="result-item">
+          <div class="result-domain">
+            <div class="domain-icon">S</div>
+            <span>sports.ndtv.com</span>
+          </div>
+          <a href="#" class="result-title">TRENDING NOW: Rishabh Pant Sets IPL 2025 Record with Fastest Century</a>
+          <div class="result-url">https://sports.ndtv.com/ipl-2025/news/rishabh-pant-fastest-century-ipl-record</div>
+          <div class="result-description">Delhi Capitals captain smashes 100 off just 38 balls against RCB, breaking previous IPL record. Incredible innings included 8 fours and 10 sixes. Watch highlights of the record-breaking performance.</div>
+        </div>
+        
+        <div class="result-item">
+          <div class="result-domain">
+            <div class="domain-icon">E</div>
+            <span>espncricinfo.com</span>
+          </div>
+          <a href="#" class="result-title">IPL 2025 Mega Auction Results: Complete List of Players Bought by All Teams</a>
+          <div class="result-url">https://www.espncricinfo.com/series/indian-premier-league-2025/news/complete-squad-list-ipl-2025</div>
+          <div class="result-description">Comprehensive guide to all player acquisitions from this season's auction. Australian all-rounder Cameron Green becomes most expensive player at ₹24 crore. Team-by-team analysis of squad strengths and weaknesses.</div>
+        </div>
+        
+        <div class="result-item">
+          <div class="result-domain">
+            <div class="domain-icon">Y</div>
+            <span>youtube.com</span>
+          </div>
+          <a href="#" class="result-title">IPL 2025 - Top Videos and Channels | YouTube</a>
+          <div class="result-url">https://www.youtube.com/results?search_query=ipl+2025</div>
+          <div class="result-description">Watch videos, tutorials, and documentaries about IPL 2025. Find popular creators, trending content, and educational material all related to your search topic.</div>
+        </div>
+        
+        <!-- People also ask section -->
+        <div class="people-also-ask">
+          <div class="ask-title">People also ask</div>
+          <div class="ask-item">
+            <span>When is the next IPL match in 2025?</span>
+            <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+              <polyline points="6 9 12 15 18 9"></polyline>
+            </svg>
+          </div>
+          <div class="ask-item">
+            <span>Which team is leading the IPL 2025 points table?</span>
+            <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+              <polyline points="6 9 12 15 18 9"></polyline>
+            </svg>
+          </div>
+          <div class="ask-item">
+            <span>Who is the highest run-scorer in IPL 2025?</span>
+            <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+              <polyline points="6 9 12 15 18 9"></polyline>
+            </svg>
+          </div>
+          <div class="ask-item">
+            <span>What are the IPL 2025 playoff qualification scenarios?</span>
+            <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+              <polyline points="6 9 12 15 18 9"></polyline>
+            </svg>
+          </div>
+        </div>
+      </div>
+    </main>
+    
+    <footer>
+      <div class="container">
+        <div class="footer-content">
+          <p>&copy; 2025 AI Smart Search. All rights reserved.</p>
+        </div>
+      </div>
+    </footer>
+
+    <script>
+      // Mock data for search suggestions
+      const mockSuggestions = {
+        'i': ['ipl', 'ipl 2025', 'iphone 16', 'instagram', 'intel processors'],
+        'ip': ['ipl', 'ipl 2025', 'ipl schedule', 'iphone 16', 'ipl points table'],
+        'ipl': ['ipl 2025', 'ipl schedule', 'ipl points table', 'ipl live score', 'ipl teams'],
+        'w': ['weather', 'weather forecast', 'wwe', 'world news', 'walmart'],
+        'we': ['weather', 'weather forecast', 'weather radar', 'weekend events', 'web development'],
+        'wea': ['weather', 'weather forecast', 'weather radar', 'weather app', 'weather channel'],
+        'weather': ['weather forecast', 'weather radar', 'weather today', 'weather app', 'weather channel'],
+        'c': ['climate change', 'crypto', 'coronavirus', 'cnn', 'cricket'],
+        'cl': ['climate change', 'cloud computing', 'classroom', 'cleaning services', 'clothing stores'],
+        'cli': ['climate change', 'clinical trials', 'click here', 'client portal', 'climate data'],
+        'clim': ['climate change', 'climate data', 'climate science', 'climate crisis', 'climate models'],
+        'climate': ['climate change', 'climate data', 'climate science', 'climate crisis', 'climate models'],
+        'ww': ['wwe', 'wwe raw', 'wwe news', 'wwe wrestlemania', 'www'],
+        'wwe': ['wwe raw', 'wwe news', 'wwe wrestlemania', 'wwe smackdown', 'wwe network']
+      };
+      
+      // Elements
+      const searchInput = document.getElementById('search-input');
+      const suggestionsContainer = document.getElementById('search-suggestions');
+      const showResultsBtn = document.getElementById('show-results-btn');
+      const mockResults = document.getElementById('mock-results');
+      const resultQueryEl = document.getElementById('result-query');
+      let selectedIndex = -1;
+      
+      // Event listeners
+      searchInput.addEventListener('input', handleInput);
+      searchInput.addEventListener('keydown', handleKeyDown);
+      document.addEventListener('click', (e) => {
+        if (!suggestionsContainer.contains(e.target) && e.target !== searchInput) {
+          suggestionsContainer.classList.remove('show');
+        }
+      });
+      
+      showResultsBtn.addEventListener('click', () => {
+        const query = searchInput.value.trim() || 'ipl 2025';
+        resultQueryEl.textContent = query;
+        mockResults.classList.add('show');
+        
+        // Scroll to results
+        mockResults.scrollIntoView({ behavior: 'smooth' });
+      });
+      
+      // Functions
+      function handleInput() {
+        const query = searchInput.value.trim().toLowerCase();
+        
+        if (query.length > 0) {
+          let suggestions = [];
+          
+          // Try to find exact match in our mock data
+          if (mockSuggestions[query]) {
+            suggestions = mockSuggestions[query];
+          } else {
+            // Try to find partial matches
+            for (const key in mockSuggestions) {
+              if (key.startsWith(query)) {
+                suggestions = mockSuggestions[key];
+                break;
+              }
+            }
+          }
+          
+          if (suggestions.length > 0) {
+            renderSuggestions(suggestions, query);
+            suggestionsContainer.classList.add('show');
+          } else {
+            suggestionsContainer.classList.remove('show');
+          }
+        } else {
+          suggestionsContainer.classList.remove('show');
+        }
+        
+        selectedIndex = -1;
+      }
+      
+      function handleKeyDown(e) {
+        const suggestionItems = suggestionsContainer.querySelectorAll('.suggestion-item');
+        
+        if (suggestionItems.length > 0) {
+          // Down arrow
+          if (e.key === 'ArrowDown') {
+            e.preventDefault();
+            selectedIndex = (selectedIndex + 1) % suggestionItems.length;
+            updateSelection(suggestionItems);
+          }
+          
+          // Up arrow
+          else if (e.key === 'ArrowUp') {
+            e.preventDefault();
+            selectedIndex = (selectedIndex - 1 + suggestionItems.length) % suggestionItems.length;
+            updateSelection(suggestionItems);
+          }
+          
+          // Enter
+          else if (e.key === 'Enter') {
+            e.preventDefault();
+            
+            if (selectedIndex >= 0) {
+              setSearchInput(suggestionItems[selectedIndex].textContent);
+              suggestionsContainer.classList.remove('show');
+              
+              // Show results
+              resultQueryEl.textContent = searchInput.value.trim();
+              mockResults.classList.add('show');
+              mockResults.scrollIntoView({ behavior: 'smooth' });
+            } else {
+              // Show results for current input
+              resultQueryEl.textContent = searchInput.value.trim();
+              mockResults.classList.add('show');
+              mockResults.scrollIntoView({ behavior: 'smooth' });
+            }
+          }
+          
+          // Escape
+          else if (e.key === 'Escape') {
+            suggestionsContainer.classList.remove('show');
+            searchInput.blur();
+          }
+        } else if (e.key === 'Enter' && searchInput.value.trim() !== '') {
+          e.preventDefault();
+          // Show results for current input
+          resultQueryEl.textContent = searchInput.value.trim();
+          mockResults.classList.add('show');
+          mockResults.scrollIntoView({ behavior: 'smooth' });
+        }
+      }
+      
+      function renderSuggestions(suggestions, query) {
+        suggestionsContainer.innerHTML = '';
+        
+        suggestions.forEach((suggestion, index) => {
+          const suggestionItem = document.createElement('div');
+          suggestionItem.className = 'suggestion-item';
+          suggestionItem.textContent = suggestion;
+          
+          suggestionItem.addEventListener('click', () => {
+            setSearchInput(suggestion);
+            suggestionsContainer.classList.remove('show');
+            
+            // Show results
+            resultQueryEl.textContent = suggestion;
+            mockResults.classList.add('show');
+            mockResults.scrollIntoView({ behavior: 'smooth' });
+          });
+          
+          suggestionItem.addEventListener('mouseenter', () => {
+            selectedIndex = index;
+            updateSelection(suggestionsContainer.querySelectorAll('.suggestion-item'));
+          });
+          
+          suggestionsContainer.appendChild(suggestionItem);
+        });
+      }
+      
+      function updateSelection(items) {
+        items.forEach((item, index) => {
+          if (index === selectedIndex) {
+            item.classList.add('selected');
+          } else {
+            item.classList.remove('selected');
+          }
+        });
+      }
+      
+      function setSearchInput(value) {
+        searchInput.value = value;
+        // Hide suggestions
+        suggestionsContainer.classList.remove('show');
+      }
+    </script>
+  </body>
+</html>
